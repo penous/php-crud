@@ -84,10 +84,15 @@ class StudenLoader {
     }
 
     public function GetStudentById($id) {
-        $handle = $this->pdo->prepare('SELECT * FROM student where id=:id');
+        $handle = $this->pdo->prepare('SELECT s.id, s.firstname student_firstname, s.lastname student_lastname, s.email student_email, c.name class_name, t.firstname teacher_firstname, t.lastname teacher_lastname FROM student s LEFT JOIN class c ON s.class_id AND c.id LEFT JOIN teacher t ON c.teacher_id AND t.id where s.id=:id');
         $handle->bindValue(':id', $id);
         $handle->execute();
         $student = $handle->fetch();
         return $student;
+    }
+
+    public function addStudent($studentData) {
+        $handle = $this->pdo->prepare('INSERT INTO student (firstname, lastname, email, class_id) VALUES (:firstname, :lastname, :email, :class_id);');
+        $handle->execute($studentData);
     }
 }
