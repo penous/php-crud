@@ -1,18 +1,22 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
-class HomepageController
-{
+class HomepageController {
     //render function with both $_GET and $_POST vars available if it would be needed.
-    public function render(array $GET, array $POST)
-    {
-        //this is just example code, you can remove the line below
-        $user = new User('John Smith');
+    public function render(array $GET, array $POST) {
+        $pdo = Connection::Open();
+        $studentLoader = new StudenLoader($pdo);
 
-        //you should not echo anything inside your controller - only assign vars here
-        // then the view will actually display them.
+        if ((isset($GET['page']) && $GET['page'] == 'students') || empty($GET)) {
+            $studentsData = $studentLoader->getAllStudents();
+            foreach ($studentsData as  $student) {
+                $student = $studentLoader->createStudent($student);
+                $students[] = $student;
+            }
+            var_dump($student);
 
-        //load the view
-        require 'View/homepage.php';
+            //load the view
+            require 'View/studentIndex.php';
+        }
     }
 }
