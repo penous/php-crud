@@ -13,7 +13,12 @@ Anything complex should be calculated in the model -->
           <th width="16.7%">Lastname</th>
           <th width="16.7%">Email</th>
           <th width="16.7%">Class</th>
-          <th colspan="4" width="16.7%">Teacher</th>
+          <th width="16.7%">Teacher</th>
+          <th colspan="3">
+            <form method="get">
+              <input style="padding: 0.1rem 7rem;" type="submit" name="button" value="New" class="btn btn-dark ">
+            </form>
+          </th>
         </tr>
       </thead>
       <tbody>
