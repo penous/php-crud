@@ -1,6 +1,4 @@
 <?php require 'includes/header.php'?>
-<!-- this is the view, try to put only simple if's and loops here.
-Anything complex should be calculated in the model -->
 <section class="d-flex justify-content-center flex-column align-items-center">
 
   <div>
@@ -22,7 +20,8 @@ Anything complex should be calculated in the model -->
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($students as $key => $student): ?>
+        <?php if (!empty($students)): ?>
+        <?php foreach ($students as $student): ?>
         <tr>
           <td><?php echo $student->getId(); ?></td>
           <td><?php echo $student->getFirstname(); ?></td>
@@ -50,6 +49,7 @@ Anything complex should be calculated in the model -->
           </td>
         </tr>
         <?php endforeach; ?>
+        <?php endif; ?>
 
       </tbody>
     </table>

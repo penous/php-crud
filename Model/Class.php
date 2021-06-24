@@ -74,14 +74,14 @@ class KlassLoader {
     }
 
     public function getAllClasses() {
-        $handle = $this->pdo->prepare('SELECT c.id class_id, c.name class_name, c.location, c.teacher_id, concat(t.firstname," ", t.lastname) AS teacher_name  FROM class c LEFT JOIN teacher t ON c.teacher_id AND t.id;');
+        $handle = $this->pdo->prepare('SELECT c.id class_id, c.name class_name, c.location, c.teacher_id, concat(t.firstname," ", t.lastname) AS teacher_name  FROM class c LEFT JOIN teacher t ON c.teacher_id = t.id;');
         $handle->execute();
         $classes = $handle->fetchAll();
         return $classes;
     }
 
     public function GetClassById($id) {
-        $handle = $this->pdo->prepare('SELECT c.id class_id, c.name class_name, c.location, c.teacher_id, concat(t.firstname," ", t.lastname) AS teacher_name  FROM class c LEFT JOIN teacher t ON c.teacher_id AND t.id where id=:id;');
+        $handle = $this->pdo->prepare('SELECT c.id class_id, c.name class_name, c.location, c.teacher_id, concat(t.firstname," ", t.lastname) AS teacher_name  FROM class c LEFT JOIN teacher t ON c.teacher_id = t.id where id=:id;');
         $handle->bindValue(':id', $id);
         $handle->execute();
         $class = $handle->fetch();
