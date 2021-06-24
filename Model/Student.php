@@ -109,4 +109,10 @@ class StudenLoader {
         $handle = $this->pdo->prepare('UPDATE student SET firstname=:firstname, lastname=:lastname, email=:email, class_id=:class_id WHERE id=:id');
         $handle->execute($studentData);
     }
+
+    public function deleteStudent($id) {
+        $handle = $this->pdo->prepare('DELETE FROM student WHERE id=:id');
+        $handle->bindValue(':id', $id);
+        $handle->execute();
+    }
 }

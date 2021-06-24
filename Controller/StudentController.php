@@ -54,9 +54,20 @@ class StudentController {
             require 'View/studentIndex.php';
         }
 
+        // DELETE student
+        if (isset($GET['button']) && $GET['button'] == 'Delete') {
+            $studentLoader->deleteStudent($GET['id']);
+
+            // Load students
+            $students = loadStudents($studentLoader);
+
+            //load the view
+            require 'View/studentIndex.php';
+        }
+
         // INDEX PAGE students
         if ((isset($GET['page']) && $GET['page'] == 'students') || empty($GET)) {
-            // Load student
+            // Load students
             $students = loadStudents($studentLoader);
 
             //load the view
