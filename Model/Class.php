@@ -81,10 +81,26 @@ class KlassLoader {
     }
 
     public function GetClassById($id) {
-        $handle = $this->pdo->prepare('SELECT c.id class_id, c.name class_name, c.location, c.teacher_id, concat(t.firstname," ", t.lastname) AS teacher_name  FROM class c LEFT JOIN teacher t ON c.teacher_id = t.id where id=:id;');
+        $handle = $this->pdo->prepare('SELECT c.id class_id, c.name class_name, c.location, c.teacher_id, concat(t.firstname," ", t.lastname) AS teacher_name  FROM class c LEFT JOIN teacher t ON c.teacher_id = t.id where c.id=:id;');
         $handle->bindValue(':id', $id);
         $handle->execute();
         $class = $handle->fetch();
         return $class;
+    }
+
+    public function addClass($classData) {
+        $handle = $this->pdo->prepare('INSERT INTO class (name, location, teacher_id) VALUES (:name, :location, :teacher_id);');
+        $handle->execute($classData);
+    }
+
+    public function updateClass($classData) {
+        $handle = $this->pdo->prepare('UPDATE class SET name=:name, location=:location, teacher_id=:teacher_id WHERE id=:id');
+        $handle->execute($classData);
+    }
+
+    public function deleteClass($id) {
+        $handle = $this->pdo->prepare('DELETE FROM class WHERE id=:id');
+        $handle->bindValue(':id', $id);
+        $handle->execute();
     }
 }
