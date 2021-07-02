@@ -1,15 +1,19 @@
 <?php
 declare(strict_types=1);
 
-class Teacher {
+class Teacher
+{
     private $id;
-    private $name;
+    private $firstName;
+    private $lastName;
     private $email;
     private $students;
 
-    public function __construct(int $id, string $name, string $email) {
+    public function __construct(int $id, string $firstName, string $lastName, string $email)
+    {
         $this->id = $id;
-        $this->name = $name;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
         $this->email = $email;
         $this->students = [];
     }
@@ -17,28 +21,48 @@ class Teacher {
     /**
      * Get the value of id
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * Get the value of name
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * Get the value of email
      */
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
 
     /**
      * Get the value of students
      */
-    public function getStudents() {
+    public function getStudents()
+    {
         return $this->students;
+    }
+
+    /**
+     * Get the value of firstName
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Get the value of lastName
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
     }
 }
